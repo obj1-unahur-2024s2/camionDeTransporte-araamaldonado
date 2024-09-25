@@ -1,5 +1,9 @@
+import cosas.*
+
 object camion {
     const cosasCargadas = []
+
+    method cosasCargadas() = cosasCargadas
 
     method peso() = 1000 + cosasCargadas.map( {c => c.peso()} ).sum()
 
@@ -26,4 +30,8 @@ object camion {
     method camionEstaExcedido() = self.peso() > 2500
 
     method puedeCircularEnRuta(unNivelMaxPel) = !self.camionEstaExcedido() && !cosasCargadas.any( {c => c.nivelPeligrosidad() > unNivelMaxPel} )
+
+    method algoPesaEntre(n1, n2) = cosasCargadas.any( { c => c.peso().between(n1, n2) } )
+
+    method cosaMasPesada() = cosasCargadas.max( {c => c.peso()} )
 } 
